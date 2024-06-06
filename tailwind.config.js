@@ -5,7 +5,7 @@ export default {
     extend: {
       backgroundImage: {
         background_header:
-          "url('./src/assets/img/header/background_header.jpg')",
+          "url('./src/assets/img/header/background_header.png')",
       },
       height: {
         466: "466px",
@@ -13,6 +13,9 @@ export default {
       },
       width: {
         326: "326px",
+      },
+      spacing: {
+        300: "300px",
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],

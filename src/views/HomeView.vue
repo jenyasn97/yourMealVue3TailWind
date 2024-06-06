@@ -1,11 +1,7 @@
 <template>
-  <div>
-    <the-header />
-  </div>
+  <div></div>
 </template>
 
-<script setup>
-import TheHeader from "@/components/TheHeader.vue";
-</script>
+<script setup></script>
 
 <style lang="scss" scoped></style>
