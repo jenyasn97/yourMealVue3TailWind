@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h1 class="flex justify-center text-center text-2xl">Hello vue3</h1>
+    <the-header />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import TheHeader from "@/components/TheHeader.vue";
+</script>
 
 <style lang="scss" scoped></style>
