@@ -1,7 +1,9 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 export const useFastFoodStore = defineStore("fastfood", () => {
+  const menuItem = ref("Бургеры");
+
   const menuList = ref([
     {
       id: 0,
@@ -99,7 +101,34 @@ export const useFastFoodStore = defineStore("fastfood", () => {
         },
       ],
     },
+    {
+      category: "Закуски",
+      categoryId: 1,
+      items: [
+        {
+          itemsId: 0,
+          name: "Плов",
+          img: "src/assets/img/burger/photo1.png",
+          price: 450,
+          weight: 450,
+        },
+        {
+          itemsId: 1,
+          name: "Салат",
+          img: "src/assets/img/burger/photo1.png",
+          price: 450,
+          weight: 450,
+        },
+        {
+          itemsId: 2,
+          name: "Суп",
+          img: "src/assets/img/burger/photo1.png",
+          price: 450,
+          weight: 450,
+        },
+      ],
+    },
   ]);
 
-  return { menuList, foodList };
+  return { menuList, foodList, menuItem };
 });

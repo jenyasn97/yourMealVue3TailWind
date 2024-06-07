@@ -17,10 +17,21 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useFastFoodStore } from "@/stores/fastfood.js";
+
+const fastFood = useFastFoodStore();
 
 const props = defineProps(["item"]);
 const active = ref("Бургеры");
+
+watch(
+  active,
+  () => {
+    fastFood.menuItem = active.value;
+  },
+  { deep: true },
+);
 </script>
 
 <style scoped lang="scss"></style>
