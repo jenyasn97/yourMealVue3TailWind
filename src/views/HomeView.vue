@@ -5,13 +5,18 @@
     </div>
     <div>
       <div class="row-start-1 m-auto w-full max-w-300 grid-flow-col">
-        <the-trash />
+        <the-trash @show-popup-delivery="$emit('showPopupDelivery', true)" />
       </div>
     </div>
     <div
       class="grid auto-cols-max grid-flow-col grid-rows-2 justify-items-center gap-4"
     >
-      <card-item v-for="item in 6" :key="item.id" :food="item" />
+      <card-item
+        v-for="item in 6"
+        :key="item.id"
+        :food="item"
+        @open-popup="$emit('openPopup', true)"
+      />
     </div>
   </div>
 </template>
@@ -19,6 +24,8 @@
 <script setup>
 import CardItem from "@/components/CardItem.vue";
 import TheTrash from "@/components/TheTrash.vue";
+
+defineEmits(["openPopup", "showPopupDelivery"]);
 
 const props = defineProps({
   title: {
