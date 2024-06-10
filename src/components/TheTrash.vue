@@ -1,5 +1,5 @@
 <template>
-  <div class="w-300 rounded-2xl bg-white px-3.5 py-6">
+  <div class="w-full rounded-2xl bg-white px-3.5 py-6 shadow-2xl sm:w-300">
     <div
       class="flex items-center justify-between border-b-2 border-b-gray pb-2"
     >
@@ -8,29 +8,35 @@
         >4</span
       >
     </div>
-    <trash-item />
-    <trash-item />
-    <trash-item />
-    <div
-      class="mb-6 mt-4 flex items-center justify-between font-nunito text-base"
-    >
-      <span>Итого:</span>
-      <span>550₽</span>
+    <div v-if="true">
+      <div class="max-h-[320px] overflow-y-auto">
+        <trash-item />
+        <trash-item />
+        <trash-item />
+        <trash-item />
+        <trash-item />
+      </div>
+      <div
+        class="mb-6 mt-4 flex items-center justify-between font-nunito text-base"
+      >
+        <span>Итого:</span>
+        <span>550₽</span>
+      </div>
+      <button-btn @click="$emit('showPopupDelivery', true)" class="mb-3"
+        >Оформить заказ
+      </button-btn>
+      <div class="flex items-center gap-1.5">
+        <img src="../assets/img/icons/bike.png" alt="bike" />
+        <span class="font-nunito text-xs">Бесплатная доставка</span>
+      </div>
     </div>
-    <button
-      class="mb-2 w-full rounded-2xl bg-orange px-3.5 py-3.5 font-nunito text-base text-white active:bg-redOrange"
-    >
-      Оформить заказ
-    </button>
-    <div class="flex items-center gap-1.5">
-      <img src="../assets/img/icons/bike.png" alt="bike" />
-      <span class="font-nunito text-xs">Бесплатная доставка</span>
-    </div>
+    <div class="mt-4 font-nunito text-base" v-else>Тут пока пусто :(</div>
   </div>
 </template>
 
 <script setup>
 import TrashItem from "@/components/TrashItem.vue";
+import ButtonBtn from "@/components/ButtonBtn.vue";
 </script>
 
 <style scoped lang="scss"></style>

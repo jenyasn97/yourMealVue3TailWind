@@ -1,10 +1,12 @@
 <template>
-  <ul class="flex items-center justify-center gap-7">
+  <ul
+    class="xs:overflow-x-auto sx: xs:justify-start flex items-center justify-center gap-7 px-5 xl:justify-center"
+  >
     <li
       v-for="item in props.item"
       :class="
         [item.name === active ? 'bg-orange' : 'bg-white'] +
-        ' transition-bg hover:bg-orange flex cursor-pointer rounded-2xl px-3.5 py-2 duration-300'
+        ' transition-bg xs:shrink-0 flex cursor-pointer rounded-2xl px-3.5 py-2 duration-300 hover:bg-orange'
       "
       @click="active = item.name"
     >
