@@ -2,10 +2,13 @@
   <div
     class="fixed bottom-0 left-0 right-0 top-0 m-auto flex h-full w-full flex-col items-center justify-center bg-black/50"
   >
+    <div class="flex h-full w-full justify-center sm:h-[440px] sm:max-w-2xl">
       <img
+        class="hidden bg-orange px-16 py-20"
         src="../assets/img/delivery.png"
         alt="delivery"
       />
+      <div class="flex w-full flex-col rounded-2xl bg-gray p-6">
         <div class="mb-3.5 flex w-full justify-between">
           <h3 class="font-nunito text-2xl font-semibold">Доставка</h3>
           <button @click="$emit('showPopupDelivery', false)">
@@ -16,6 +19,7 @@
             />
           </button>
         </div>
+        <div class="mb-3.5 flex w-full flex-col gap-2">
           <my-input
             class="font-nunito text-xs"
             type="text"
@@ -61,6 +65,7 @@
         <div>
           <div
             v-if="selectedOption === 'delivery'"
+            class="flex w-full flex-col gap-3"
           >
             <div>
               <my-input
@@ -83,6 +88,7 @@
             </div>
           </div>
         </div>
+        <button-btn class="mt-auto bg-white">Оформить</button-btn>
       </div>
     </div>
   </div>
