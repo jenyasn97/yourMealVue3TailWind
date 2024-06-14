@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-import { ref, watch } from "vue";
+import { ref } from "vue";
+import axios from "axios";
 
 export const useFastFoodStore = defineStore("fastfood", () => {
   const menuItem = ref("Бургеры");
@@ -52,83 +53,21 @@ export const useFastFoodStore = defineStore("fastfood", () => {
     },
   ]);
 
-  const foodList = ref([
-    {
-      category: "Бургеры",
-      categoryId: 0,
-      items: [
-        {
-          itemsId: 0,
-          name: "Мясная бомба",
-          img: "src/assets/img/burger/photo1.png",
-          price: 689,
-          weight: 520,
-        },
-        {
-          itemsId: 1,
-          name: "Супер сырный",
-          img: "src/assets/img/burger/photo2.png",
-          price: 550,
-          weight: 512,
-        },
-        {
-          itemsId: 2,
-          name: "Сытный",
-          img: "src/assets/img/burger/photo3.png",
-          price: 639,
-          weight: 580,
-        },
-        {
-          itemsId: 3,
-          name: "Тяжелый удар",
-          img: "src/assets/img/burger/photo4.png",
-          price: 480,
-          weight: 470,
-        },
-        {
-          itemsId: 4,
-          name: "Вечная классика",
-          img: "src/assets/img/burger/photo1.png",
-          price: 450,
-          weight: 450,
-        },
-        {
-          itemsId: 5,
-          name: "Итальянский",
-          img: "src/assets/img/burger/photo1.png",
-          price: 570,
-          weight: 510,
-        },
-      ],
-    },
-    {
-      category: "Закуски",
-      categoryId: 1,
-      items: [
-        {
-          itemsId: 0,
-          name: "Плов",
-          img: "src/assets/img/burger/photo1.png",
-          price: 450,
-          weight: 450,
-        },
-        {
-          itemsId: 1,
-          name: "Салат",
-          img: "src/assets/img/burger/photo1.png",
-          price: 450,
-          weight: 450,
-        },
-        {
-          itemsId: 2,
-          name: "Суп",
-          img: "src/assets/img/burger/photo1.png",
-          price: 450,
-          weight: 450,
-        },
-      ],
-    },
-  ]);
+  const foodList = ref([]);
 
-  return { menuList, foodList, menuItem };
+  async function getFoodList() {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/menu.json`,
+      );
+      foodList.value = response.data;
+      console.log(foodList.value);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  getFoodList();
+
+  return { menuList, foodList, menuItem, getFoodList };
 });
