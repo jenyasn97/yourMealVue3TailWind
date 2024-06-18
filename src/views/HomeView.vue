@@ -19,7 +19,8 @@
         v-for="item in props.foodList.items"
         :key="item.id"
         :food="item"
-        @open-popup="$emit('openPopup', true)"
+        @open-popup="$emit('openPopup', { ...item })"
+        @add-item-to-trash="$emit('addItemToTrash', { ...item })"
       />
     </article>
   </main>
@@ -29,7 +30,7 @@
 import CardItem from "@/components/CardItem.vue";
 import TheTrash from "@/components/TheTrash.vue";
 
-defineEmits(["openPopup", "showPopupDelivery"]);
+defineEmits(["openPopup", "showPopupDelivery", "addItemToTrash"]);
 
 const props = defineProps({
   foodList: {

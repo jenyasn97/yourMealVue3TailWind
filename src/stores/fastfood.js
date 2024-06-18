@@ -4,6 +4,9 @@ import axios from "axios";
 
 export const useFastFoodStore = defineStore("fastfood", () => {
   const menuItem = ref("Бургеры");
+  const isLoading = ref(false);
+  const foodList = ref([]);
+  const orders = ref([]);
   const menuList = ref([
     {
       id: 0,
@@ -52,13 +55,8 @@ export const useFastFoodStore = defineStore("fastfood", () => {
     },
   ]);
 
-  const isLoading = ref(false);
-
-  const foodList = ref([]);
-
   async function getFoodList() {
     isLoading.value = true;
-
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/menu.json`,
@@ -72,5 +70,5 @@ export const useFastFoodStore = defineStore("fastfood", () => {
     }
   }
 
-  return { menuList, foodList, menuItem, isLoading, getFoodList };
+  return { menuList, foodList, menuItem, isLoading, orders, getFoodList };
 });

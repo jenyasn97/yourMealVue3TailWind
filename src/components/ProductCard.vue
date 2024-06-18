@@ -6,7 +6,7 @@
       class="flex h-full w-full flex-col rounded-2xl bg-white p-6 sm:h-auto sm:max-w-2xl"
     >
       <div class="mb-6 flex w-full justify-between">
-        <h3 class="font-nunito text-4xl">Мясная бомба</h3>
+        <h3 class="font-nunito text-4xl">{{ props.item.name }}</h3>
         <button @click="$emit('closePopup', false)">
           <img src="../assets/img/icons/close.png" alt="close" />
         </button>
@@ -15,27 +15,24 @@
         class="mb-10 flex flex-col items-center gap-4 sm:flex-row sm:items-stretch"
       >
         <img
-          class="w-full max-w-[320px]"
-          src="../assets/img/burger/photo1.png"
-          alt="burger1"
+          class="h-[220px] w-full max-w-[276px] rounded-2xl"
+          :src="props.item.img"
+          :alt="props.item.name"
         />
-        <div
-          class="flex flex-col justify-between font-nunito text-base sm:text-sm"
-        >
+        <div class="flex flex-col font-nunito text-base sm:text-sm">
           <p class="mb-2.5">
-            Супер мясное наслаждение! Большая рубленая котлета из свежего
-            говяжего мяса покорит вас своей сочностью, а хрустящие листья салата
-            добавят свежести.
+            {{ props.item.desc }}
           </p>
           <div class="mb-3">
             <p class="text-xs">Состав:</p>
             <p class="text-xm">
-              Пшеничная булочка, Котлета из говядины, Красный лук, Листья
-              салата, Соус горчичный
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
             </p>
           </div>
 
-          <span class="text-xs text-black/20">520г, ккал 430</span>
+          <span class="mt-auto text-xs text-black/20"
+            >{{ props.item.weight }}г, ккал {{ props.item.caloriesIn100 }}</span
+          >
         </div>
       </div>
       <div class="mt-auto flex items-center justify-between pb-8">
@@ -43,7 +40,9 @@
           <button-btn class="mr-4 px-24">Добавить</button-btn>
           <counter-qua />
         </div>
-        <span class="right-0 font-nunito text-2xl">550₽</span>
+        <span class="right-0 font-nunito text-2xl"
+          >{{ props.item.price }}₽</span
+        >
       </div>
     </div>
   </div>
@@ -54,6 +53,13 @@ import ButtonBtn from "@/components/ButtonBtn.vue";
 import CounterQua from "@/components/CounterQua.vue";
 
 defineEmits(["closePopup"]);
+
+const props = defineProps({
+  item: {
+    type: Object,
+    default: () => {},
+  },
+});
 </script>
 
 <style lang="scss" scoped></style>

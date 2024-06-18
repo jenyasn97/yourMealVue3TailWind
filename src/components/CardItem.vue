@@ -1,9 +1,10 @@
 <template>
   <div class="w-full rounded-2xl bg-white p-3 md:max-w-300">
     <img
-      class="mb-4 h-1/2 w-full rounded-2xl md:h-[220px] md:w-[276px]"
+      class="mb-4 h-1/2 w-full cursor-pointer rounded-2xl md:h-[220px] md:w-[276px]"
       :src="props.food.img.trim()"
       :alt="props.food.name"
+      @click="$emit('openPopup', true)"
     />
     <span
       class="mb-2 block font-nunito text-base font-semibold text-black md:text-2xl"
@@ -17,7 +18,9 @@
     >
       {{ props.food.weight }}г
     </p>
-    <button-btn @click="$emit('openPopup', true)">Добавить</button-btn>
+    <button-btn @click="$emit('addItemToTrash', { ...props.food })"
+      >Добавить
+    </button-btn>
   </div>
 </template>
 
@@ -31,7 +34,7 @@ const props = defineProps({
   },
 });
 
-defineEmits(["openPopup"]);
+defineEmits(["openPopup", "addItemToTrash"]);
 </script>
 
 <style scoped lang="scss"></style>
