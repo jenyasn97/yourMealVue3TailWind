@@ -5,11 +5,12 @@
     >
       <li
         v-for="item in props.item"
+        :key="item.name"
         :class="
           [item.name === active ? 'bg-orange' : 'bg-white'] +
           ' transition-bg flex cursor-pointer rounded-2xl px-3.5 py-2 duration-300 hover:bg-orange xs:shrink-0'
         "
-        @click="active = item.name"
+        @click="itemActive(item)"
       >
         <img class="mr-2 h-6 w-6" :alt="item.name" :src="item.img" /><span
           class="font-nunito text-black"
@@ -28,6 +29,13 @@ const fastFood = useFastFoodStore();
 
 const props = defineProps(["item"]);
 const active = ref("Бургеры");
+
+const emit = defineEmits(["itemActive"]);
+
+function itemActive(item) {
+  active.value = item.name;
+  emit("itemActive", active.value);
+}
 
 watch(
   active,

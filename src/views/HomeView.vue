@@ -1,7 +1,9 @@
 <template>
   <main class="flex flex-col px-5 pb-24 md:grid md:justify-center md:gap-x-8">
     <div class="order-2 md:order-none md:col-start-2">
-      <h2 class="mb-6 font-nunito text-4xl">{{ props.title }}</h2>
+      <h2 class="mb-6 font-nunito text-4xl">
+        {{ props.foodList.category }}
+      </h2>
     </div>
     <aside>
       <div
@@ -14,7 +16,7 @@
       class="order-3 grid w-full grid-cols-2 justify-items-center gap-4 sm:grid-cols-4 md:order-none md:grid-cols-2 lg:grid-cols-3"
     >
       <card-item
-        v-for="item in 10"
+        v-for="item in props.foodList.items"
         :key="item.id"
         :food="item"
         @open-popup="$emit('openPopup', true)"
@@ -30,14 +32,8 @@ import TheTrash from "@/components/TheTrash.vue";
 defineEmits(["openPopup", "showPopupDelivery"]);
 
 const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-    default: () => "",
-  },
-
   foodList: {
-    type: Array,
+    type: Object,
     required: true,
     default: () => [],
   },

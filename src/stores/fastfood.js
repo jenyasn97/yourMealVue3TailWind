@@ -4,7 +4,6 @@ import axios from "axios";
 
 export const useFastFoodStore = defineStore("fastfood", () => {
   const menuItem = ref("Бургеры");
-
   const menuList = ref([
     {
       id: 0,
@@ -53,9 +52,13 @@ export const useFastFoodStore = defineStore("fastfood", () => {
     },
   ]);
 
+  const isLoading = ref(false);
+
   const foodList = ref([]);
 
   async function getFoodList() {
+    isLoading.value = true;
+
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/menu.json`,
@@ -64,10 +67,10 @@ export const useFastFoodStore = defineStore("fastfood", () => {
       console.log(foodList.value);
     } catch (error) {
       console.log(error);
+    } finally {
+      isLoading.value = false;
     }
   }
 
-  getFoodList();
-
-  return { menuList, foodList, menuItem, getFoodList };
+  return { menuList, foodList, menuItem, isLoading, getFoodList };
 });

@@ -16,7 +16,7 @@
       >
         <img
           class="w-full max-w-[320px]"
-          src="../assets/img/burgers/photo1.png"
+          src="../assets/img/burger/photo1.png"
           alt="burger1"
         />
         <div

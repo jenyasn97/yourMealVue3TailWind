@@ -1,19 +1,21 @@
 <template>
-  <div class="max-w-full rounded-2xl bg-white p-3 md:max-w-300">
+  <div class="w-full rounded-2xl bg-white p-3 md:max-w-300">
     <img
-      class="mb-4 rounded"
-      src="../assets/img/burgers/photo1.png"
-      alt="burger1"
+      class="mb-4 h-1/2 w-full rounded-2xl md:h-[220px] md:w-[276px]"
+      :src="props.food.img.trim()"
+      :alt="props.food.name"
     />
     <span
       class="mb-2 block font-nunito text-base font-semibold text-black md:text-2xl"
-      >689₽</span
+      >{{ props.food.price }}₽</span
     >
-    <h2 class="mb-4 font-nunito text-xs md:mb-7 md:text-base">Мясная бомба</h2>
+    <h2 class="mb-4 font-nunito text-xs md:mb-7 md:text-base">
+      {{ props.food.name }}
+    </h2>
     <p
       class="mb-2 font-nunito text-xs font-semibold text-black/20 md:text-base"
     >
-      520г
+      {{ props.food.weight }}г
     </p>
     <button-btn @click="$emit('openPopup', true)">Добавить</button-btn>
   </div>
@@ -21,6 +23,13 @@
 
 <script setup>
 import ButtonBtn from "@/components/ButtonBtn.vue";
+
+const props = defineProps({
+  food: {
+    type: Object,
+    default: () => {},
+  },
+});
 
 defineEmits(["openPopup"]);
 </script>
