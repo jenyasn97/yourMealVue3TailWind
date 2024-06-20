@@ -18,7 +18,7 @@
     >
       {{ props.food.weight }}г
     </p>
-    <button-btn @click="$emit('addItemToTrash', { ...props.food })"
+    <button-btn @click="$emit('addItemToOrder', { ...props.food })"
       >Добавить
     </button-btn>
   </div>
@@ -34,7 +34,7 @@ const props = defineProps({
   },
 });
 
-defineEmits(["openPopup", "addItemToTrash"]);
+defineEmits(["openPopup", "addItemToOrder"]);
 </script>
 
 <style scoped lang="scss"></style>

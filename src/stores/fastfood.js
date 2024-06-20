@@ -70,5 +70,12 @@ export const useFastFoodStore = defineStore("fastfood", () => {
     }
   }
 
-  return { menuList, foodList, menuItem, isLoading, orders, getFoodList };
+  return {
+    menuList,
+    foodList,
+    menuItem,
+    isLoading,
+    orders,
+    getFoodList,
+  };
 });

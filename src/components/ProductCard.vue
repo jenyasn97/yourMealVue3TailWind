@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed bottom-0 left-0 right-0 top-0 m-auto flex h-full w-full flex-col items-center justify-center bg-black/50"
+    class="fixed bottom-0 left-0 right-0 top-0 m-auto flex h-full w-full flex-col items-center justify-center bg-black/80"
   >
     <div
       class="flex h-full w-full flex-col rounded-2xl bg-white p-6 sm:h-auto sm:max-w-2xl"
@@ -37,8 +37,15 @@
       </div>
       <div class="mt-auto flex items-center justify-between pb-8">
         <div class="flex">
-          <button-btn class="mr-4 px-24">Добавить</button-btn>
-          <counter-qua />
+          <button-btn @click="$emit('closePopup', false)" class="mr-4 px-24"
+            >{{ fastFood.orders[idx] ? "Добавить" : "Закрыть" }}
+          </button-btn>
+          <counter-qua
+            @increment="$emit('increment')"
+            @decrement="$emit('decrement')"
+          >
+            {{ fastFood.orders[idx]?.quantity || 0 }}
+          </counter-qua>
         </div>
         <span class="right-0 font-nunito text-2xl"
           >{{ props.item.price }}₽</span
@@ -51,8 +58,12 @@
 <script setup>
 import ButtonBtn from "@/components/ButtonBtn.vue";
 import CounterQua from "@/components/CounterQua.vue";
+import { useFastFoodStore } from "@/stores/fastfood.js";
+import { computed } from "vue";
 
-defineEmits(["closePopup"]);
+const fastFood = useFastFoodStore();
+
+defineEmits(["closePopup", "increment", "decrement"]);
 
 const props = defineProps({
   item: {
@@ -60,6 +71,10 @@ const props = defineProps({
     default: () => {},
   },
 });
+
+const idx = computed(() =>
+  fastFood.orders.findIndex((item) => item.name === props.item.name),
+);
 </script>
 
 <style lang="scss" scoped></style>

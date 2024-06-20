@@ -1,14 +1,16 @@
 <template>
   <div
-    class="fixed bottom-0 left-0 right-0 top-0 m-auto flex h-full w-full flex-col items-center justify-center bg-black/50"
+    class="fixed bottom-0 left-0 right-0 top-0 m-auto flex h-full w-full flex-col items-center justify-center bg-black/80"
   >
     <div class="flex h-full w-full justify-center sm:h-[440px] sm:max-w-2xl">
       <img
-        class="hidden bg-orange px-16 py-20"
+        class="hidden bg-orange px-16 py-20 sm:block sm:rounded-bl-2xl sm:rounded-tl-2xl"
         src="../assets/img/delivery.png"
         alt="delivery"
       />
-      <div class="flex w-full flex-col rounded-2xl bg-gray p-6">
+      <div
+        class="flex w-full flex-col rounded-2xl bg-gray p-6 sm:rounded-none sm:rounded-br-2xl sm:rounded-tr-2xl"
+      >
         <div class="mb-3.5 flex w-full justify-between">
           <h3 class="font-nunito text-2xl font-semibold">Доставка</h3>
           <button @click="$emit('showPopupDelivery', false)">

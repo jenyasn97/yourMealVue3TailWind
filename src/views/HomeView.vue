@@ -9,7 +9,11 @@
       <div
         class="order-1 mb-6 md:order-none md:row-start-1 md:m-auto md:w-full md:max-w-300"
       >
-        <the-trash @show-popup-delivery="$emit('showPopupDelivery', true)" />
+        <the-trash
+          @increment="$emit('increment', $event)"
+          @decrement="$emit('decrement', $event)"
+          @show-popup-delivery="$emit('showPopupDelivery', true)"
+        />
       </div>
     </aside>
     <article
@@ -20,7 +24,7 @@
         :key="item.id"
         :food="item"
         @open-popup="$emit('openPopup', { ...item })"
-        @add-item-to-trash="$emit('addItemToTrash', { ...item })"
+        @add-item-to-order="$emit('addItemToOrder', { ...item })"
       />
     </article>
   </main>
@@ -30,7 +34,13 @@
 import CardItem from "@/components/CardItem.vue";
 import TheTrash from "@/components/TheTrash.vue";
 
-defineEmits(["openPopup", "showPopupDelivery", "addItemToTrash"]);
+defineEmits([
+  "openPopup",
+  "showPopupDelivery",
+  "addItemToOrder",
+  "increment",
+  "decrement",
+]);
 
 const props = defineProps({
   foodList: {

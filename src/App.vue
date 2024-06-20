@@ -10,9 +10,11 @@
     <home-view
       v-else
       :foodList="fastFood.foodList[idx]"
-      @open-popup="openPopup($event)"
+      @increment="increment($event)"
+      @decrement="decrement($event)"
+      @open-popup="openPopup"
       @show-popup-delivery="showDelivery = true"
-      @add-item-to-trash="addItemToOrder($event)"
+      @add-item-to-order="addItemToOrder"
     />
     <the-footer />
   </div>
@@ -20,6 +22,8 @@
   <product-card
     v-show="showPopup"
     @close-popup="showPopup = false"
+    @increment="increment(targetItem)"
+    @decrement="decrement(targetItem)"
     :item="targetItem"
   />
   <delivery-popup
@@ -40,13 +44,23 @@ import DeliveryPopup from "@/components/DeliveryPopup.vue";
 import AppLoader from "@/components/AppLoader.vue";
 
 const fastFood = useFastFoodStore();
+
 const showPopup = ref(false);
 const showDelivery = ref(false);
 const activeMenuItem = ref("Бургеры");
+
 const idx = computed(() =>
   fastFood.menuList.findIndex((item) => item.name === activeMenuItem.value),
 );
+
+console.log(`idx`, idx.value);
+
 const targetItem = ref({});
+const trashItemIdx = computed(() => {
+  return fastFood.orders.findIndex(
+    (item) => item.name === targetItem.value.name,
+  );
+});
 
 function openPopup(item) {
   showPopup.value = true;
@@ -68,11 +82,34 @@ function addItemToOrder(item) {
 }
 
 function checkItemInOrders(item) {
-  const exists = fastFood.orders.some(
-    (searchItem) => searchItem.name === item.name,
+  return fastFood.orders.some((searchItem) => searchItem.name === item.name);
+}
+
+function increment(item) {
+  const orderItemIndex = fastFood.orders.findIndex(
+    (order) => order.name === item.name,
   );
-  console.log(exists);
-  return exists;
+  if (orderItemIndex !== -1) {
+    fastFood.orders[orderItemIndex].quantity++;
+  } else {
+    fastFood.orders.push({ ...item, quantity: 1 });
+  }
+  console.log(`orderItemIndex`, orderItemIndex);
+  console.log(`increment`, item);
+}
+
+function decrement(item) {
+  const orderItemIndex = fastFood.orders.findIndex(
+    (order) => order.name === item.name,
+  );
+  if (orderItemIndex !== -1) {
+    const orderItem = fastFood.orders[orderItemIndex];
+    if (orderItem.quantity > 1) {
+      orderItem.quantity--;
+    } else {
+      fastFood.orders.splice(orderItemIndex, 1);
+    }
+  }
 }
 
 onMounted(async () => {
