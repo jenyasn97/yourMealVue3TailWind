@@ -53,14 +53,7 @@ const idx = computed(() =>
   fastFood.menuList.findIndex((item) => item.name === activeMenuItem.value),
 );
 
-console.log(`idx`, idx.value);
-
 const targetItem = ref({});
-const trashItemIdx = computed(() => {
-  return fastFood.orders.findIndex(
-    (item) => item.name === targetItem.value.name,
-  );
-});
 
 function openPopup(item) {
   showPopup.value = true;
@@ -79,6 +72,7 @@ function addItemToOrder(item) {
     );
     if (orderItem) orderItem.quantity++;
   }
+  localStorage.setItem("orders", JSON.stringify(fastFood.orders));
 }
 
 function checkItemInOrders(item) {
@@ -94,8 +88,7 @@ function increment(item) {
   } else {
     fastFood.orders.push({ ...item, quantity: 1 });
   }
-  console.log(`orderItemIndex`, orderItemIndex);
-  console.log(`increment`, item);
+  localStorage.setItem("orders", JSON.stringify(fastFood.orders));
 }
 
 function decrement(item) {
@@ -110,10 +103,14 @@ function decrement(item) {
       fastFood.orders.splice(orderItemIndex, 1);
     }
   }
+  localStorage.setItem("orders", JSON.stringify(fastFood.orders));
 }
 
 onMounted(async () => {
   await fastFood.getFoodList();
+  if (localStorage.getItem("orders")) {
+    fastFood.orders = JSON.parse(localStorage.getItem("orders"));
+  }
 });
 
 watch(fastFood.orders, () => {

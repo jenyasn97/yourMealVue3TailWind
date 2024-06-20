@@ -2,20 +2,37 @@
   <div
     class="fixed bottom-0 left-0 right-0 top-0 m-auto flex h-full w-full flex-col items-center justify-center bg-black/80"
   >
-    <div class="flex h-full w-full justify-center sm:h-[440px] sm:max-w-2xl">
+    <form class="flex h-full w-full justify-center sm:h-[440px] sm:max-w-2xl">
       <img
         class="hidden bg-orange px-16 py-20 sm:block sm:rounded-bl-2xl sm:rounded-tl-2xl"
         src="../assets/img/delivery.png"
         alt="delivery"
       />
+      <app-loader v-if="isLoaded" class="flex justify-center" />
       <div
+        v-else-if="isSuccess"
+        class="flex w-full flex-col items-center justify-center rounded-2xl bg-gray p-6 sm:rounded-none sm:rounded-br-2xl sm:rounded-tr-2xl"
+      >
+        <div class="flex w-full justify-center gap-3">
+          <button @click.prevent="$emit('showPopupDelivery', false)">
+            <img
+              @click.prevent="$emit('showPopupDelivery', false)"
+              src="../assets/img/icons/close.png"
+              alt="close"
+            />
+          </button>
+          <p class="font-nunito text-xl">Заказ успешно отправлен</p>
+        </div>
+      </div>
+      <div
+        v-else
         class="flex w-full flex-col rounded-2xl bg-gray p-6 sm:rounded-none sm:rounded-br-2xl sm:rounded-tr-2xl"
       >
         <div class="mb-3.5 flex w-full justify-between">
           <h3 class="font-nunito text-2xl font-semibold">Доставка</h3>
-          <button @click="$emit('showPopupDelivery', false)">
+          <button @click.prevent="$emit('showPopupDelivery', false)">
             <img
-              @click="$emit('showPopupDelivery', false)"
+              @click.prevent="$emit('showPopupDelivery', false)"
               src="../assets/img/icons/close.png"
               alt="close"
             />
@@ -26,11 +43,13 @@
             class="font-nunito text-xs"
             type="text"
             placeholder="Ваше имя"
+            v-model="name"
           />
           <my-input
             class="font-nunito text-xs"
-            type="text"
-            placeholder="Телефон"
+            type="tel"
+            placeholder="Ваш телефон +7 (999) 999-99-99)"
+            v-model="phone"
           />
         </div>
         <div class="mb-3.5 flex flex-col gap-3.5">
@@ -73,7 +92,8 @@
               <my-input
                 class="font-nunito text-xs"
                 type="text"
-                placeholder="Улица, дом, квартира"
+                placeholder="Адрес"
+                v-model="fullAddress"
               />
             </div>
             <div class="flex gap-4">
@@ -81,29 +101,104 @@
                 class="font-nunito text-xs"
                 type="text"
                 placeholder="Этаж"
+                v-model="floor"
               />
               <my-input
                 class="font-nunito text-xs"
                 type="text"
                 placeholder="Домофон"
+                v-model="intercom"
               />
             </div>
           </div>
         </div>
-        <button-btn class="mt-auto bg-white">Оформить</button-btn>
+        <button-btn @click.prevent="sendOrder" class="mt-auto bg-white"
+          >Оформить
+        </button-btn>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
 <script setup>
 import MyInput from "@/components/myInput.vue";
 import ButtonBtn from "@/components/ButtonBtn.vue";
+import AppLoader from "@/components/AppLoader.vue";
 import { ref } from "vue";
+import { useFastFoodStore } from "@/stores/fastfood.js";
+import axios from "axios";
+
+const fastFood = useFastFoodStore();
 
 const selectedOption = ref("delivery");
+const name = ref("");
+const phone = ref("");
+const fullAddress = ref("");
+const floor = ref("");
+const intercom = ref("");
+const isLoaded = ref(false);
+const isSuccess = ref(false);
 
-defineEmits(["showPopupDelivery"]);
+async function sendOrder() {
+  const order = ref({});
+
+  if (!name.value || !phone.value || !fastFood.orders.length) {
+    alert(
+      "Заполните все обязательные поля и добавьте хотя бы один товар в заказ",
+    );
+    return;
+  }
+
+  if (selectedOption.value === "selfDelivery") {
+    order.value = {
+      name: name.value,
+      phone: phone.value,
+      selfDelivery: true,
+      orderList: fastFood.orders,
+    };
+  } else {
+    if (!fullAddress.value || !floor.value || !intercom.value) {
+      console.log("Заполните все поля для доставки");
+      return;
+    }
+    order.value = {
+      name: name.value,
+      phone: phone.value,
+      address: fullAddress.value,
+      selfDelivery: false,
+      floor: floor.value,
+      intercom: intercom.value,
+      orderList: fastFood.orders,
+    };
+  }
+
+  try {
+    isLoaded.value = true;
+    await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/orders.json`,
+      order.value,
+    );
+    isSuccess.value = true;
+  } catch (error) {
+    console.error(`Заказ не отправлен`, error);
+  } finally {
+    fastFood.orders = [];
+    localStorage.setItem("orders", JSON.stringify(fastFood.orders));
+    isLoaded.value = false;
+    name.value = "";
+    phone.value = "";
+    fullAddress.value = "";
+    floor.value = "";
+    selectedOption.value = "delivery";
+    intercom.value = "";
+    isSuccess.value = false;
+    setTimeout(() => {
+      emit("showPopupDelivery", false);
+    }, 1500);
+  }
+}
+
+const emit = defineEmits(["showPopupDelivery"]);
 </script>
 
 <style lang="scss" scoped></style>
