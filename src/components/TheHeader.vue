@@ -1,6 +1,6 @@
 <template>
   <header
-    class="md:bg-background_header_1024 bg-background_header_mob xs:bg-background_header_768 flex h-466 w-full flex-col items-center bg-cover bg-repeat-round xl:bg-background_header"
+    class="flex h-466 w-full flex-col items-center bg-background_header_mob bg-cover bg-repeat-round xs:bg-background_header_768 md:bg-background_header_1024 xl:bg-background_header"
   >
     <div class="py-6">
       <a href="#"> <img src="../assets/img/logo.png" alt="logo" /></a>
