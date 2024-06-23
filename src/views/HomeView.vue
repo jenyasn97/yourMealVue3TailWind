@@ -10,6 +10,7 @@
         class="order-1 mb-6 md:order-none md:row-start-1 md:m-auto md:w-full md:max-w-300"
       >
         <the-trash
+          @open-trash="$emit('openTrash', true)"
           @increment="$emit('increment', $event)"
           @decrement="$emit('decrement', $event)"
           @show-popup-delivery="$emit('showPopupDelivery', true)"
@@ -40,6 +41,7 @@ defineEmits([
   "addItemToOrder",
   "increment",
   "decrement",
+  "openTrash",
 ]);
 
 const props = defineProps({

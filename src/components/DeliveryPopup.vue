@@ -11,7 +11,7 @@
       <app-loader v-if="isLoaded" class="flex justify-center" />
       <div
         v-else-if="isSuccess"
-        class="flex w-full flex-col items-center justify-center rounded-2xl bg-gray p-6 sm:rounded-none sm:rounded-br-2xl sm:rounded-tr-2xl"
+        class="flex w-full flex-col items-center justify-center bg-gray p-6 sm:rounded-2xl sm:rounded-none sm:rounded-br-2xl sm:rounded-tr-2xl"
       >
         <div class="flex w-full justify-center gap-3">
           <button @click.prevent="$emit('showPopupDelivery', false)">
@@ -26,7 +26,7 @@
       </div>
       <div
         v-else
-        class="flex w-full flex-col rounded-2xl bg-gray p-6 sm:rounded-none sm:rounded-br-2xl sm:rounded-tr-2xl"
+        class="flex w-full flex-col bg-gray p-6 sm:rounded-none sm:rounded-br-2xl sm:rounded-tr-2xl"
       >
         <div class="mb-3.5 flex w-full justify-between">
           <h3 class="font-nunito text-2xl font-semibold">Доставка</h3>

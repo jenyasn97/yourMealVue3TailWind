@@ -4,14 +4,13 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        background_header:
-          "url('../src/assets/img/header/background_header.png')",
+        background_header: "url('../assets/img/header/background_header.png')",
         background_header_1024:
-          "url('../src/assets/img/header/background_header_1024.png')",
+          "url('../assets/img/header/background_header_1024.png')",
         background_header_768:
-          "url('../src/assets/img/header/background_header_768.png')",
+          "url('../assets/img/header/background_header_768.png')",
         background_header_mob:
-          "url('../src/assets/img/header/background_header_mob.png')",
+          "url('../assets/img/header/background_header_mob.png')",
       },
       height: {
         466: "466px",

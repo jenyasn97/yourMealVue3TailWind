@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden bg-gray">
+  <div class="bg-gray">
     <the-header class="mb-10" />
     <menu-item
       :item="fastFood.menuList"
@@ -15,13 +15,14 @@
       @open-popup="openPopup"
       @show-popup-delivery="showDelivery = true"
       @add-item-to-order="addItemToOrder"
+      @open-trash="showTrash = true"
     />
     <the-footer />
   </div>
 
   <product-card
-    v-show="showPopup"
-    @close-popup="showPopup = false"
+    v-show="showPopupCard"
+    @close-popup="showPopupCard = false"
     @increment="increment(targetItem)"
     @decrement="decrement(targetItem)"
     :item="targetItem"
@@ -29,6 +30,13 @@
   <delivery-popup
     v-show="showDelivery"
     @show-popup-delivery="showDelivery = false"
+  />
+  <app-trash-popup
+    v-show="showTrash"
+    @close-popup-trash="showTrash = false"
+    @increment="increment"
+    @decrement="decrement"
+    @show-popup-delivery="showDeliveryPopup"
   />
 </template>
 
@@ -42,11 +50,14 @@ import ProductCard from "@/components/ProductCard.vue";
 import { computed, onMounted, ref, watch } from "vue";
 import DeliveryPopup from "@/components/DeliveryPopup.vue";
 import AppLoader from "@/components/AppLoader.vue";
+import { setNoScroll } from "@/utils";
+import AppTrashPopup from "@/components/AppTrashPopup.vue";
 
 const fastFood = useFastFoodStore();
 
-const showPopup = ref(false);
+const showPopupCard = ref(false);
 const showDelivery = ref(false);
+const showTrash = ref(false);
 const activeMenuItem = ref("Бургеры");
 
 const idx = computed(() =>
@@ -55,10 +66,15 @@ const idx = computed(() =>
 
 const targetItem = ref({});
 
+function showDeliveryPopup() {
+  showDelivery.value = true;
+  showTrash.value = false;
+}
+
 function openPopup(item) {
-  showPopup.value = true;
+  showPopupCard.value = true;
   if (item) {
-    showPopup.value = true;
+    showPopupCard.value = true;
     targetItem.value = item;
   }
 }
@@ -113,8 +129,31 @@ onMounted(async () => {
   }
 });
 
-watch(fastFood.orders, () => {
-  console.log(`orders`, fastFood.orders);
+watch(showDelivery, () => {
+  if (showDelivery.value) {
+    setNoScroll(false);
+  }
+  if (!showDelivery.value) {
+    setNoScroll(true);
+  }
+});
+
+watch(showPopupCard, () => {
+  if (showPopupCard.value) {
+    setNoScroll(false);
+  }
+  if (!showPopupCard.value) {
+    setNoScroll(true);
+  }
+});
+
+watch(showTrash, () => {
+  if (showTrash.value) {
+    setNoScroll(false);
+  }
+  if (!showTrash.value) {
+    setNoScroll(true);
+  }
 });
 </script>
 
