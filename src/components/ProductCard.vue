@@ -6,7 +6,7 @@
       class="flex h-full w-full flex-col bg-white p-6 sm:h-auto sm:max-w-2xl sm:rounded-2xl"
     >
       <div class="mb-6 flex w-full justify-between">
-        <h3 class="font-nunito text-4xl">{{ props.item.name }}</h3>
+        <h3 class="font-nunito text-2xl sm:text-4xl">{{ props.item.name }}</h3>
         <button @click="$emit('closePopup', false)">
           <img src="../assets/img/icons/close.png" alt="close" />
         </button>
@@ -37,7 +37,9 @@
       </div>
       <div class="mt-auto flex items-center justify-between pb-8">
         <div class="flex">
-          <button-btn @click="$emit('closePopup', false)" class="mr-4 px-24"
+          <button-btn
+            @click="$emit('closePopup', false)"
+            class="mr-4 px-16 sm:px-24"
             >{{ fastFood.orders[idx] ? "Добавить" : "Закрыть" }}
           </button-btn>
           <counter-qua
@@ -47,7 +49,7 @@
             {{ fastFood.orders[idx]?.quantity || 0 }}
           </counter-qua>
         </div>
-        <span class="right-0 font-nunito text-2xl"
+        <span class="right-0 font-nunito text-xl sm:text-2xl"
           >{{ props.item.price }}₽</span
         >
       </div>

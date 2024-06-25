@@ -1,5 +1,7 @@
 <template>
-  <div class="flex w-full flex-col rounded-2xl bg-white p-3 md:max-w-300">
+  <div
+    class="flex w-full flex-col rounded-2xl bg-white p-3 shadow-2xl transition hover:-translate-y-2 md:max-w-300"
+  >
     <img
       class="mb-4 h-[154px] w-full cursor-pointer rounded-2xl md:h-[220px] md:w-[276px]"
       :src="props.food.img.trim()"

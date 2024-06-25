@@ -8,7 +8,8 @@
     >
       <h3 class="font-nunito text-2xl font-semibold">Корзина</h3>
       <span
-        class="block rounded-2xl bg-gray px-4 py-0.5 font-nunito text-base"
+        class="block rounded-2xl px-4 py-0.5 font-nunito text-base"
+        :class="fastFood.orders.length === 0 ? 'bg-gray' : 'bg-orange'"
         >{{ fastFood.orders.length }}</span
       >
     </div>
@@ -36,7 +37,8 @@
     >
       <h3 class="font-nunito text-2xl font-semibold">Корзина</h3>
       <span
-        class="block rounded-2xl bg-gray px-4 py-0.5 font-nunito text-base"
+        class="block rounded-2xl px-4 py-0.5 font-nunito text-base"
+        :class="fastFood.orders.length === 0 ? 'bg-gray' : 'bg-orange'"
         >{{ fastFood.orders.length }}</span
       >
     </div>
