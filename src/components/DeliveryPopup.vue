@@ -2,7 +2,9 @@
   <div
     class="fixed bottom-0 left-0 right-0 top-0 m-auto flex h-full w-full flex-col items-center justify-center bg-black/80"
   >
-    <form class="flex h-full w-full justify-center sm:h-[440px] sm:max-w-2xl">
+    <form
+      class="animate__zoomIn animate__animated flex h-full w-full justify-center sm:h-[440px] sm:max-w-2xl"
+    >
       <img
         class="hidden bg-orange px-16 py-20 sm:block sm:rounded-bl-2xl sm:rounded-tl-2xl"
         src="../assets/img/delivery.png"

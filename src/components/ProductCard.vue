@@ -3,7 +3,7 @@
     class="fixed bottom-0 left-0 right-0 top-0 m-auto flex h-full w-full flex-col items-center justify-center bg-black/80"
   >
     <div
-      class="flex h-full w-full flex-col bg-white p-6 sm:h-auto sm:max-w-2xl sm:rounded-2xl"
+      class="scale-1 animate__zoomIn animate__animated flex h-full w-full flex-col bg-white p-6 sm:h-auto sm:max-w-2xl sm:rounded-2xl"
     >
       <div class="mb-6 flex w-full justify-between">
         <h3 class="font-nunito text-2xl sm:text-4xl">{{ props.item.name }}</h3>

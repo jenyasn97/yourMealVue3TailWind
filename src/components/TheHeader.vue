@@ -7,7 +7,7 @@
     </div>
     <div class="flex flex-col gap-6 sm:flex-row">
       <img
-        class="order-2 max-w-[326px] px-9 py-4 sm:order-1"
+        class="animate__animated animate__pulse animate__infinite order-2 max-w-[326px] px-9 py-4 sm:order-1"
         src="../assets/img/header/burger_header.png"
         srcset="
           ../assets/img/header/burger_header_768.png  768w,
@@ -17,7 +17,7 @@
       />
       <div class="order-1 flex flex-col sm:order-2">
         <h1
-          class="mb-4 text-center font-nunito text-3xl font-extrabold leading-tight text-white sm:my-12 sm:text-start sm:text-5xl"
+          class="animate__animated animate__rubberBand mb-4 text-center font-nunito text-3xl font-extrabold leading-tight text-white sm:my-12 sm:text-start sm:text-5xl"
         >
           Только самые <br />
           <span class="text-red">сочные бургеры!</span>
