@@ -7,7 +7,7 @@
       {{ title }}
     </div>
     <div
-      class="mt-4 rounded border-2 p-2 text-base"
+      class="mt-4 rounded border-2 p-2 text-base sm:text-xl"
       :class="isOpen ? 'd-block' : 'hidden'"
     >
       <slot></slot>
