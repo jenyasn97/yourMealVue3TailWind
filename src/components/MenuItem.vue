@@ -1,14 +1,14 @@
 <template>
   <nav>
     <ul
-      class="sx: flex items-center justify-center gap-7 px-5 xs:justify-start xs:overflow-x-auto xl:justify-center"
+      class="flex items-center justify-center gap-7 pb-9 pl-5 xs:justify-start xs:overflow-x-auto xl:justify-center xl:pl-0"
     >
       <li
         v-for="item in props.item"
         :key="item.name"
         :class="
           [item.name === active ? 'bg-orange' : 'bg-white'] +
-          ' transition-bg flex cursor-pointer rounded-2xl px-3.5 py-2 duration-300 hover:bg-orange xs:shrink-0'
+          ' transition-bg flex cursor-pointer rounded-2xl px-3.5 py-2 shadow-xl duration-300 hover:bg-orange xs:shrink-0'
         "
         @click="itemActive(item)"
       >

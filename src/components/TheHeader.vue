@@ -1,9 +1,27 @@
 <template>
   <header
-    class="flex h-466 w-full flex-col items-center bg-background_header_mob bg-cover bg-repeat-round xs:bg-background_header_768 md:bg-background_header_1024 xl:bg-background_header"
+    class="flex h-466 w-full flex-col items-center bg-background_header_mob bg-cover bg-repeat-round px-3.5 xs:bg-background_header_768 md:bg-background_header_1024 xl:bg-background_header xl:px-0"
   >
-    <div class="py-6">
-      <a href="#"> <img src="../assets/img/logo.png" alt="logo" /></a>
+    <div class="flex w-full justify-between py-6 xl:w-3/4 xl:max-w-screen-xl">
+      <router-link
+        class="rounded-full px-4 py-1 font-nunito text-2xl font-semibold text-white transition hover:bg-redOrange"
+        to="/"
+        ><img src="../assets/img/logo.png" alt="logo" />
+      </router-link>
+      <div class="flex gap-8">
+        <router-link
+          to="/about"
+          class="rounded-full px-4 py-1 font-nunito text-2xl font-semibold text-white transition hover:bg-redOrange"
+        >
+          О нас
+        </router-link>
+        <router-link
+          to="/faqview"
+          class="rounded-full px-4 py-1 font-nunito text-2xl font-semibold text-white transition hover:bg-redOrange"
+        >
+          FAQ
+        </router-link>
+      </div>
     </div>
     <div class="flex flex-col gap-6 sm:flex-row">
       <img

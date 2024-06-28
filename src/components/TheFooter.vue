@@ -1,7 +1,9 @@
 <template>
-  <footer class="flex w-full justify-start bg-white px-3.5 md:justify-center">
+  <footer
+    class="flex w-full justify-start bg-white px-3.5 md:justify-center xl:px-0"
+  >
     <div
-      class="flex flex-col justify-between py-12 sm:w-full md:gap-12 xl:w-3/4"
+      class="flex max-w-screen-xl flex-col justify-between py-12 sm:w-full md:gap-12 xl:w-3/4"
     >
       <div
         class="md:flex md:max-w-full md:flex-col md:justify-between lg:flex-row"
