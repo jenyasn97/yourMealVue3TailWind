@@ -1,6 +1,7 @@
 # your_meal_vue3_tailwind
 
-Этот проект разрбаботан в целях обучения с использованием Vue 3 (Composition API), TailwindCSS, Animate.css, Firebase
+Этот проект разрбаботан в целях обучения с использованием Vue 3 (Composition API) Pinia, VueRouter, TailwindCSS,
+Animate.css, Firebase
 
 ## Установка зависимостей проекта
 

@@ -9,9 +9,19 @@
       v-if="fastFood.foodList[idx]"
       class="order-2 md:order-none md:col-start-2"
     >
-      <h2 class="mb-6 font-nunito text-4xl">
-        {{ fastFood.foodList[idx].category }}
-      </h2>
+      <div class="flex justify-between">
+        <h2 class="mb-6 font-nunito text-4xl">
+          {{ fastFood.foodList[idx].category }}
+        </h2>
+
+        <div>
+          <select>
+            <option value="" disabled selected>Сортировать</option>
+            <option value="asc">По возрастанию цены</option>
+            <option value="desc">По убыванию цены</option>
+          </select>
+        </div>
+      </div>
     </div>
     <aside>
       <div
@@ -26,6 +36,7 @@
       </div>
     </aside>
     <article
+      v-auto-animate
       class="order-3 grid w-full grid-cols-2 justify-items-center gap-4 sm:grid-cols-4 md:order-none md:grid-cols-2 lg:grid-cols-3"
     >
       <card-item
@@ -60,6 +71,7 @@
 </template>
 
 <script setup>
+import { vAutoAnimate } from "@formkit/auto-animate";
 import { useFastFoodStore } from "@/stores/fastfood.js";
 import { computed, onMounted, ref, watch } from "vue";
 import AppLoader from "@/components/AppLoader.vue";

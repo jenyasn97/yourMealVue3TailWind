@@ -32,12 +32,18 @@
               placeholder="Ваше имя"
               v-model="name"
             />
+            <small class="text-red" v-show="showErrorName && name !== ''"
+              >Введите имя с большой буквы</small
+            >
             <my-input
               class="font-nunito text-xs"
               type="tel"
-              placeholder="Ваш телефон +7 (999) 999-99-99)"
+              placeholder="Ваш телефон 8 (999) 999-99-99"
               v-model="phone"
             />
+            <small class="text-red" v-show="showErrorPhone && phone !== ''"
+              >Введите корректный номер</small
+            >
           </div>
           <div class="mb-3.5 flex flex-col gap-3.5">
             <div class="flex items-center">
@@ -134,8 +140,9 @@
 import MyInput from "@/components/myInput.vue";
 import ButtonBtn from "@/components/ButtonBtn.vue";
 import AppLoader from "@/components/AppLoader.vue";
-import { ref } from "vue";
+import { ref, computed, watch } from "vue";
 import { useFastFoodStore } from "@/stores/fastfood.js";
+import { getFinalPrice } from "@/utils/index.js";
 import axios from "axios";
 
 const fastFood = useFastFoodStore();
@@ -149,13 +156,17 @@ const intercom = ref("");
 const isLoaded = ref(false);
 const isSuccess = ref(false);
 
+const phoneRegex = /^(\+7|8)\s?\(?\d{3}\)?\s?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+const fioRegex = /^[А-ЯЁ][а-яё]/;
+
+const showErrorName = computed(() => !fioRegex.test(name.value));
+const showErrorPhone = computed(() => !phoneRegex.test(phone.value));
+
 async function sendOrder() {
   const order = ref({});
 
-  if (!name.value || !phone.value || !fastFood.orders.length) {
-    alert(
-      "Заполните все обязательные поля и добавьте хотя бы один товар в заказ",
-    );
+  if (showErrorName.value && showErrorPhone.value && fastFood.orders.length) {
+    alert("Заполните все обязательные поля");
     return;
   }
 
@@ -165,10 +176,10 @@ async function sendOrder() {
       phone: phone.value,
       selfDelivery: true,
       orderList: fastFood.orders,
+      finalPrice: getFinalPrice(fastFood.orders),
     };
   } else {
     if (!fullAddress.value || !floor.value || !intercom.value) {
-      alert("Заполните все поля для доставки");
       return;
     }
     order.value = {
@@ -179,6 +190,7 @@ async function sendOrder() {
       floor: floor.value,
       intercom: intercom.value,
       orderList: fastFood.orders,
+      finalPrice: getFinalPrice(fastFood.orders),
     };
   }
 

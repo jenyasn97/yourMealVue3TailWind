@@ -1,5 +1,6 @@
 <template>
   <div
+    v-auto-animate
     class="flex w-full justify-start bg-gray px-3.5 md:justify-center xl:px-0"
   >
     <div
@@ -72,6 +73,9 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { vAutoAnimate } from "@formkit/auto-animate";
+import CardItem from "@/components/CardItem.vue";
+</script>
 
 <style scoped lang="scss"></style>
