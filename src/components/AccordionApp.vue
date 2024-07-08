@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-2 rounded-2xl border-2 p-2">
+  <div class="mt-2 rounded-2xl p-2 shadow-2xl">
     <div
       @click="isOpen = !isOpen"
       class="cursor-pointer rounded-2xl bg-orange p-4 text-2xl font-bold text-white sm:text-3xl"

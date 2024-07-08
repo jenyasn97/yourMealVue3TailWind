@@ -1,6 +1,8 @@
 <template>
   <div
     class="fixed bottom-0 left-0 right-0 top-0 m-auto flex h-full w-full flex-col items-center justify-center bg-black/80"
+    @keyup.esc="$emit('closePopup', false)"
+    tabindex="0"
   >
     <div
       class="scale-1 animate__zoomIn animate__animated flex h-full w-full flex-col bg-white p-6 sm:h-auto sm:max-w-2xl sm:rounded-2xl"

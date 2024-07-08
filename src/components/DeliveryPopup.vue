@@ -1,6 +1,8 @@
 <template>
   <div
     class="fixed bottom-0 left-0 right-0 top-0 m-auto flex h-full w-full flex-col items-center justify-center bg-black/80"
+    @keyup.esc="$emit('showPopupDelivery', false)"
+    tabindex="0"
   >
     <form
       class="animate__zoomIn animate__animated flex h-full w-full justify-center sm:h-[440px] sm:max-w-2xl"
@@ -140,7 +142,7 @@
 import MyInput from "@/components/myInput.vue";
 import ButtonBtn from "@/components/ButtonBtn.vue";
 import AppLoader from "@/components/AppLoader.vue";
-import { ref, computed, watch } from "vue";
+import { ref, computed } from "vue";
 import { useFastFoodStore } from "@/stores/fastfood.js";
 import { getFinalPrice } from "@/utils/index.js";
 import axios from "axios";

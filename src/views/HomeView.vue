@@ -9,14 +9,14 @@
       v-if="fastFood.foodList[idx]"
       class="order-2 md:order-none md:col-start-2"
     >
-      <div class="flex justify-between">
-        <h2 class="mb-6 font-nunito text-4xl">
+      <div class="mb-6 flex items-center justify-between">
+        <h2 class="font-nunito text-4xl font-extrabold">
           {{ fastFood.foodList[idx].category }}
         </h2>
 
         <div>
-          <select>
-            <option value="" disabled selected>Сортировать</option>
+          <select v-model="sortBy">
+            <option value="default" selected>По умолчанию</option>
             <option value="asc">По возрастанию цены</option>
             <option value="desc">По убыванию цены</option>
           </select>
@@ -41,7 +41,7 @@
     >
       <card-item
         v-if="fastFood.foodList[idx]"
-        v-for="item in fastFood.foodList[idx].items"
+        v-for="item in itemsList"
         :key="item.id"
         :food="item"
         @open-popup="openPopup(item)"
@@ -93,6 +93,19 @@ const activeMenuItem = ref("Бургеры");
 const idx = computed(() =>
   fastFood.menuList.findIndex((item) => item.name === activeMenuItem.value),
 );
+
+const itemsList = computed(() => fastFood.foodList[idx.value].items);
+const sortBy = ref("default");
+
+watch(sortBy, (newValue) => {
+  itemsList.value.sort((a, b) => {
+    if (newValue === "asc") {
+      return a.price - b.price;
+    } else {
+      return b.price - a.price;
+    }
+  });
+});
 
 const targetItem = ref({});
 
